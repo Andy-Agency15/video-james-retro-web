@@ -1,10 +1,9 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Retrowave/Synthwave Design System */
 
 @layer base {
   :root {
@@ -39,47 +38,41 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Synthwave Colors */
+    --neon-pink: 320 100% 60%;
+    --neon-cyan: 180 100% 50%;
+    --neon-purple: 270 100% 70%;
+    --neon-orange: 30 100% 60%;
+    --dark-bg: 240 15% 8%;
+    --darker-bg: 240 20% 5%;
+    --grid-color: 300 100% 40%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -101,5 +94,148 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: linear-gradient(45deg, hsl(var(--darker-bg)), hsl(var(--dark-bg)));
+    color: hsl(var(--neon-cyan));
+    font-family: 'Orbitron', 'Courier New', monospace;
   }
+}
+
+/* Synthwave Animations */
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes neon-pulse {
+  0%, 100% { 
+    text-shadow: 0 0 5px hsl(var(--neon-pink)), 0 0 10px hsl(var(--neon-pink)), 0 0 15px hsl(var(--neon-pink));
+  }
+  50% { 
+    text-shadow: 0 0 10px hsl(var(--neon-pink)), 0 0 20px hsl(var(--neon-pink)), 0 0 30px hsl(var(--neon-pink));
+  }
+}
+
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes grid-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+/* Custom Classes */
+.neon-text {
+  color: hsl(var(--neon-cyan));
+  text-shadow: 0 0 5px hsl(var(--neon-cyan)), 0 0 10px hsl(var(--neon-cyan)), 0 0 15px hsl(var(--neon-cyan));
+  animation: neon-flicker 3s infinite;
+}
+
+.neon-pink {
+  color: hsl(var(--neon-pink));
+  text-shadow: 0 0 5px hsl(var(--neon-pink)), 0 0 10px hsl(var(--neon-pink)), 0 0 15px hsl(var(--neon-pink));
+}
+
+.neon-purple {
+  color: hsl(var(--neon-purple));
+  text-shadow: 0 0 5px hsl(var(--neon-purple)), 0 0 10px hsl(var(--neon-purple)), 0 0 15px hsl(var(--neon-purple));
+}
+
+.chrome-text {
+  background: linear-gradient(45deg, hsl(var(--neon-cyan)), hsl(var(--neon-pink)), hsl(var(--neon-purple)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 10px hsl(var(--neon-pink)));
+}
+
+.vhs-border {
+  border: 2px solid hsl(var(--neon-pink));
+  box-shadow: 
+    0 0 10px hsl(var(--neon-pink)),
+    inset 0 0 10px rgba(255, 20, 147, 0.1);
+}
+
+.crt-screen {
+  background: linear-gradient(90deg, transparent 50%, rgba(0, 255, 255, 0.03) 50%);
+  background-size: 4px 4px;
+  position: relative;
+}
+
+.crt-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(transparent 50%, rgba(0, 255, 255, 0.03) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanlines::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--neon-cyan)), transparent);
+  animation: scanlines 3s linear infinite;
+  opacity: 0.5;
+}
+
+.synthwave-grid {
+  background-image: 
+    linear-gradient(hsl(var(--grid-color)) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--grid-color)) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: grid-move 20s linear infinite;
+  opacity: 0.3;
+}
+
+.glitch-effect {
+  animation: glitch 0.3s infinite;
+}
+
+.retro-button {
+  background: linear-gradient(45deg, hsl(var(--neon-pink)), hsl(var(--neon-purple)));
+  border: 2px solid hsl(var(--neon-cyan));
+  color: white;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 0 10px hsl(var(--neon-pink)),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.retro-button:hover {
+  box-shadow: 
+    0 0 20px hsl(var(--neon-pink)),
+    0 0 30px hsl(var(--neon-cyan)),
+    inset 0 0 20px rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.vhs-label {
+  background: linear-gradient(45deg, #1a1a2e, #16213e);
+  border: 1px solid hsl(var(--neon-cyan));
+  box-shadow: 
+    0 0 10px hsl(var(--neon-cyan)),
+    inset 0 0 10px rgba(0, 255, 255, 0.1);
 }

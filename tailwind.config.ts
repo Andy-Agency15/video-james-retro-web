@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,19 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Synthwave colors
+				'neon-pink': 'hsl(var(--neon-pink))',
+				'neon-cyan': 'hsl(var(--neon-cyan))',
+				'neon-purple': 'hsl(var(--neon-purple))',
+				'neon-orange': 'hsl(var(--neon-orange))',
+				'dark-bg': 'hsl(var(--dark-bg))',
+				'darker-bg': 'hsl(var(--darker-bg))',
+				'grid-color': 'hsl(var(--grid-color))'
+			},
+			fontFamily: {
+				'orbitron': ['Orbitron', 'monospace'],
+				'mono': ['Courier New', 'monospace']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,13 +97,41 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'neon-flicker': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' }
+				},
+				'neon-pulse': {
+					'0%, 100%': { 
+						textShadow: '0 0 5px hsl(var(--neon-pink)), 0 0 10px hsl(var(--neon-pink)), 0 0 15px hsl(var(--neon-pink))'
+					},
+					'50%': { 
+						textShadow: '0 0 10px hsl(var(--neon-pink)), 0 0 20px hsl(var(--neon-pink)), 0 0 30px hsl(var(--neon-pink))'
+					}
+				},
+				'scanlines': {
+					'0%': { transform: 'translateY(0)' },
+					'100%': { transform: 'translateY(100vh)' }
+				},
+				'glitch': {
+					'0%, 100%': { transform: 'translate(0)' },
+					'20%': { transform: 'translate(-2px, 2px)' },
+					'40%': { transform: 'translate(-2px, -2px)' },
+					'60%': { transform: 'translate(2px, 2px)' },
+					'80%': { transform: 'translate(2px, -2px)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'neon-flicker': 'neon-flicker 3s infinite',
+				'neon-pulse': 'neon-pulse 2s ease-in-out infinite',
+				'scanlines': 'scanlines 3s linear infinite',
+				'glitch': 'glitch 0.3s infinite'
 			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
